@@ -136,7 +136,8 @@ install_flannel() {
 #       * Any other cluster-wide variables (e.g., RANCHER_HOSTNAME)
 #   - Ensures the script has access to standard system binaries.
 # ------------------------------------------------------------------
-CONFIG_FILE="/etc/default/cluster-config.env"
+CONFIG_FILE="/root/k3s-cluster-automation/scripts/cluster-config.env"
+
 [ -f "$CONFIG_FILE" ] || { echo "Missing $CONFIG_FILE"; exit 1; }
 source "$CONFIG_FILE"
 
