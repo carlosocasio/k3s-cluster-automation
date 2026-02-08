@@ -27,9 +27,13 @@
 #   - This script should be run once per node
 # ------------------------------------------------------------------
 
+#!/usr/bin/env bash
+
 set -e
 
 NODE_NAME="$1"
+K3S_USER="k3s"
+K3S_PASSWORD="ChangeMe123!"
 
 if [[ -z "$NODE_NAME" ]]; then
   echo "ERROR: No node name provided."
@@ -37,7 +41,34 @@ if [[ -z "$NODE_NAME" ]]; then
   exit 1
 fi
 
-hostnamectl set-hostname "$1"
-systemctl enable --now sshd
-transactional-update pkg install git
-reboot
+echo "Setting hostname to '$NODE_NAME'..."
+hostnamectl set-hostname "$NODE_NAME"
+
+if id "$K3S_USER" >/dev/null 2>&1; then
+  echo "User '$K3S_USER' already exists. Skipping user creation."
+else
+  echo "Creating user '$K3S_USER'..."
+  useradd -m -s /bin/bash "$K3S_USER"
+  echo "$K3S_USER:$K3S_PASSWORD" | chpasswd
+  usermod -aG wheel "$K3S_USER"
+  echo "User '$K3S_USER' created and added to wheel group."
+fi
+
+if ! command -v git >/dev/null 2>&1; then
+  echo "Git not found. Installing git using transactional-update..."
+  transactional-update pkg install git
+  echo "Git installation scheduled. Reboot required."
+  REBOOT_REQUIRED=true
+else
+  echo "Git already installed."
+  REBOOT_REQUIRED=false
+fi
+
+echo "Node preparation complete."
+
+if [[ "$REBOOT_REQUIRED" == true ]]; then
+  echo "Rebooting system to complete setup..."
+  reboot
+else
+  echo "No reboot required."
+fi
