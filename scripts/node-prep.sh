@@ -50,7 +50,6 @@ else
   echo "Creating user '$K3S_USER'..."
   useradd -m -s /bin/bash "$K3S_USER"
   echo "$K3S_USER:$K3S_PASSWORD" | chpasswd
-  usermod -aG wheel "$K3S_USER"
   echo "User '$K3S_USER' created and added to wheel group."
 fi
 
