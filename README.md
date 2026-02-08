@@ -15,7 +15,7 @@ k3s-cluster-automation/
 ├── configs/
 │   └── cluster-config.env
 ├── examples/
-│   └── apache-deployment.yaml
+│   └── apache2-deployment.yaml
 ├── docs/
 │   └── cluster-layout.png
 ├── README.md
@@ -60,7 +60,15 @@ RANCHER_REPLICAS=3
 - **Warning:** Bootstrap password is `admin`. Change it immediately after first login.
 
 ## Installation
-Once your node is installed sign in and go to a terminal / shell
+Download openSUSE microOS (x86_64) from https://get.opensuse.org/microos/#download
+
+Use a virtualization software like VMware to install openSUSE microOS
+    Recommended minimum specs:
+    - 8 GB Ram (preferable 16GB)
+    - 4 CPU cores
+    - 50 GB of Storage (more if you plan to install many deployments)
+
+Once your VMs are installed and running, sign in and go to a terminal / shell
 
 Execute the following command to prep the node:
    curl -fsSL https://raw.githubusercontent.com/carlosocasio/k3s-cluster-automation/main/scripts/node-prep.sh | bash -s <node name>
