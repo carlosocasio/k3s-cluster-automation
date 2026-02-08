@@ -110,6 +110,11 @@ curl -fsSL https://raw.githubusercontent.com/carlosocasio/k3s-cluster-automation
 Sign in as root if working in the VM <br>
 Sign in as `k3s` if connecting remotely via SSH, then switch to root using `su -` <br>
 ```diff
++ username: k3s
++ password: ChangeMe123!
+```
+
+```diff
 + The IP Address of the VM is displayed on the server console
 ```
 
