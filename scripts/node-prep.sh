@@ -27,8 +27,6 @@
 #   - This script should be run once per node
 # ------------------------------------------------------------------
 
-#!/usr/bin/env bash
-
 set -e
 
 NODE_NAME="$1"
@@ -50,7 +48,6 @@ else
   echo "Creating user '$K3S_USER'..."
   useradd -m -s /bin/bash "$K3S_USER"
   echo "$K3S_USER:$K3S_PASSWORD" | chpasswd
-  echo "User '$K3S_USER' created and added to wheel group."
 fi
 
 if ! command -v git >/dev/null 2>&1; then
