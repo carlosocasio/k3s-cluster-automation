@@ -250,7 +250,7 @@ configure_network() {
     # Update /etc/hosts with cluster nodes for name resolution
     cat <<EOF > /etc/hosts
 127.0.0.1 localhost
-192.168.154.210 Node-1 rancher1.org
+192.168.154.210 Node-1 myrancher.org
 192.168.154.211 Node-2
 192.168.154.212 Node-3
 192.168.154.213 Node-4
@@ -652,7 +652,7 @@ echo "Active Nodes" > /dev/tty
 kubectl get nodes > /dev/tty
 echo " " > /dev/tty
 echo "Once all the pods are running you may access Rancher by " > /dev/tty
-echo "browsing to  http://rancher1.org (bootstrap password: admin)" > /dev/tty
+echo "browsing to  http://myrancher.org (bootstrap password: admin)" > /dev/tty
 echo "The BootStrap password is admin" > /dev/tty
 echo " " > /dev/tty
 echo "Give it a few minutes ... then have some fun!" > /dev/tty
